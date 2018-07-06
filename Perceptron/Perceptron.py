@@ -3,6 +3,7 @@ from sklearn.cross_validation import train_test_split
 from sklearn.metrics import accuracy_score
 import numpy as np
 import random
+import matplotlib.pyplot as plt
 
 
 # 参考 https://blog.csdn.net/wds2006sdo/article/details/51923546
@@ -81,3 +82,19 @@ if __name__ == '__main__':
     test_predict = Predict(test_features, w, b)
     score = accuracy_score(test_label, test_predict)
     print('The accuracy score is：', score)
+
+    # 绘制图形
+    for i, x in enumerate(X):
+        if Y[i] == 1:
+            plt.plot(x[0], x[1], 'ro')
+        else:
+            plt.plot(x[0], x[1], 'bx')
+    plt.xlabel('x0')
+    plt.ylabel('x1')
+
+    line_x = [0, 10]
+    line_y = [0, 0]
+    for i in range(len(line_x)):
+        line_y[i] = (-w[0] * line_x[i] - b) / w[1]
+    plt.plot(line_x, line_y)
+    plt.show()
